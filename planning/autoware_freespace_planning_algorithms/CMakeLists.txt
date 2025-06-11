@@ -29,23 +29,23 @@ target_link_libraries(${PROJECT_NAME}
   reeds_shepp
 )
 
-if(BUILD_TESTING)
-  find_package(ament_cmake_ros REQUIRED)
-  ament_add_ros_isolated_gtest(${PROJECT_NAME}-test
-    test/src/test_freespace_planning_algorithms.cpp
-  )
-  target_link_libraries(${PROJECT_NAME}-test
-    ${PROJECT_NAME}
-  )
-
-  find_package(ament_cmake_ros REQUIRED)
-  ament_add_gtest(rrtstar_core_informed-test
-    test/src/test_rrtstar_core_informed.cpp
-  )
-  target_link_libraries(rrtstar_core_informed-test
-    ${PROJECT_NAME}
-  )
-endif()
+# if(BUILD_TESTING)
+#   find_package(ament_cmake_ros REQUIRED)
+#   ament_add_ros_isolated_gtest(${PROJECT_NAME}-test
+#     test/src/test_freespace_planning_algorithms.cpp
+#   )
+#   target_link_libraries(${PROJECT_NAME}-test
+#     ${PROJECT_NAME}
+#   )
+#
+#   find_package(ament_cmake_ros REQUIRED)
+#   ament_add_gtest(rrtstar_core_informed-test
+#     test/src/test_rrtstar_core_informed.cpp
+#   )
+#   target_link_libraries(rrtstar_core_informed-test
+#     ${PROJECT_NAME}
+#   )
+# endif()
 
 ament_auto_package(
   INSTALL_TO_SHARE

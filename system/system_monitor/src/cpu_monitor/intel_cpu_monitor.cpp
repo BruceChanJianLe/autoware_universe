@@ -34,6 +34,7 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include <fstream>
 
 namespace fs = boost::filesystem;
 
@@ -179,7 +180,8 @@ void CPUMonitor::getTempNames()
 
     std::string label = boost::algorithm::replace_all_copy(temp_input, "input", "label");
     const fs::path label_path(label);
-    fs::ifstream ifs(label_path, std::ios::in);
+    // fs::ifstream ifs(label_path, std::ios::in);
+    std::ifstream ifs(label_path, std::ios::in);
     if (ifs) {
       std::string line;
       if (std::getline(ifs, line)) {

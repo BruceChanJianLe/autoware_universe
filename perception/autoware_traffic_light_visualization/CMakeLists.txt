@@ -5,6 +5,7 @@ find_package(autoware_cmake REQUIRED)
 autoware_package()
 
 find_package(OpenCV REQUIRED)
+find_package(cv_bridge REQUIRED)
 
 ament_auto_add_library(traffic_light_roi_visualizer SHARED
   src/traffic_light_roi_visualizer/node.cpp
@@ -18,6 +19,8 @@ target_include_directories(traffic_light_roi_visualizer SYSTEM PUBLIC
 target_link_libraries(traffic_light_roi_visualizer
   ${OpenCV_LIBRARIES}
 )
+
+ament_target_dependencies(traffic_light_roi_visualizer cv_bridge)
 
 rclcpp_components_register_node(traffic_light_roi_visualizer
   PLUGIN "autoware::traffic_light::TrafficLightRoiVisualizerNode"

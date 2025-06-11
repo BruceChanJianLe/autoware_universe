@@ -25,7 +25,7 @@ ament_auto_add_library(gnss_poser_node SHARED
 )
 
 target_link_libraries(gnss_poser_node
-  Geographic
+  GeographicLib
 )
 
 rclcpp_components_register_node(gnss_poser_node

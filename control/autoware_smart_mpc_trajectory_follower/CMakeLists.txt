@@ -11,8 +11,11 @@ autoware_package()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-ignored-optimization-argument")
 
-execute_process(COMMAND bash -c "pip3 install numba==0.58.1 --force-reinstall")
-execute_process(COMMAND bash -c "pip3 install GPy")
+# execute_process(COMMAND bash -c "pip3 install numba==0.58.1 --force-reinstall")
+# execute_process(COMMAND bash -c "pip3 install GPy")
+
+execute_process(COMMAND bash -c "pipx install numba --force")
+execute_process(COMMAND bash -c "pipx install GPy --force")
 
 pybind11_add_module(proxima_calc SHARED
   ${PROJECT_NAME}/src/proxima_calc.cpp

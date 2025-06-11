@@ -30,6 +30,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <fstream>
+#include <fmt/core.h>
 
 namespace process = boost::process;
 

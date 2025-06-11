@@ -16,7 +16,9 @@
 #define AUTOWARE__LIDAR_CENTERPOINT__CENTERPOINT_CONFIG_HPP_
 
 #include <cstddef>
+#include <iterator>
 #include <vector>
+#include <algorithm>
 
 namespace autoware::lidar_centerpoint
 {
@@ -68,12 +70,11 @@ public:
       circle_nms_dist_threshold_ = circle_nms_dist_threshold;
     }
 
-    yaw_norm_thresholds_ =
-      std::vector<float>(yaw_norm_thresholds.begin(), yaw_norm_thresholds.end());
+    yaw_norm_thresholds_ = yaw_norm_thresholds;
 
     for (auto & yaw_norm_threshold : yaw_norm_thresholds_) {
       yaw_norm_threshold =
-        (yaw_norm_threshold >= 0.f && yaw_norm_threshold < 1.f) ? yaw_norm_threshold : 0.f;
+        (yaw_norm_threshold >= 0. && yaw_norm_threshold < 1.) ? yaw_norm_threshold : 0.;
     }
 
     grid_size_x_ = static_cast<std::size_t>((range_max_x_ - range_min_x_) / voxel_size_x_);
@@ -119,7 +120,7 @@ public:
   // post-process params
   float score_threshold_{0.35f};
   float circle_nms_dist_threshold_{1.5f};
-  std::vector<float> yaw_norm_thresholds_{};
+  std::vector<double> yaw_norm_thresholds_{};
 
   // calculated params
   std::size_t grid_size_x_ = (range_max_x_ - range_min_x_) / voxel_size_x_;

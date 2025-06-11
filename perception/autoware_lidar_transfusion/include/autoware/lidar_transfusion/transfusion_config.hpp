@@ -73,8 +73,9 @@ public:
     if (circle_nms_dist_threshold > 0.0) {
       circle_nms_dist_threshold_ = circle_nms_dist_threshold;
     }
-    yaw_norm_thresholds_ =
-      std::vector<float>(yaw_norm_thresholds.begin(), yaw_norm_thresholds.end());
+    yaw_norm_thresholds_ = yaw_norm_thresholds;
+    // yaw_norm_thresholds_ =
+    //   std::vector<float>(yaw_norm_thresholds.begin(), yaw_norm_thresholds.end());
     for (auto & yaw_norm_threshold : yaw_norm_thresholds_) {
       yaw_norm_threshold =
         (yaw_norm_threshold >= 0.0 && yaw_norm_threshold < 1.0) ? yaw_norm_threshold : 0.0;
@@ -122,7 +123,7 @@ public:
   // the score threshold for classification
   float score_threshold_{0.2};
   float circle_nms_dist_threshold_{0.5};
-  std::vector<float> yaw_norm_thresholds_{0.3, 0.3, 0.3, 0.3, 0.0};
+  std::vector<double> yaw_norm_thresholds_{0.3, 0.3, 0.3, 0.3, 0.0};
   std::size_t max_num_pillars_{max_voxels_};
   const std::size_t pillar_points_bev_{max_num_points_per_pillar_ * max_num_pillars_};
   // the detected boxes result decode by (x, y, z, w, l, h, yaw)

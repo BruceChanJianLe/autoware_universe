@@ -34,6 +34,7 @@
 #include <regex>
 #include <string>
 #include <utility>
+#include <fstream>
 
 namespace bp = boost::process;
 namespace fs = boost::filesystem;
@@ -97,7 +98,8 @@ void CPUMonitorBase::checkTemp(diagnostic_updater::DiagnosticStatusWrapper & sta
   for (auto itr = temps_.begin(); itr != temps_.end(); ++itr) {
     // Read temperature file
     const fs::path path(itr->path_);
-    fs::ifstream ifs(path, std::ios::in);
+    // fs::ifstream ifs(path, std::ios::in);
+    std::ifstream ifs(path, std::ios::in);
     if (!ifs) {
       stat.add("file open error", itr->path_);
       error_str = "file open error";
@@ -386,7 +388,8 @@ void CPUMonitorBase::checkFrequency(diagnostic_updater::DiagnosticStatusWrapper 
   for (auto itr = freqs_.begin(); itr != freqs_.end(); ++itr) {
     // Read scaling_cur_freq file
     const fs::path path(itr->path_);
-    fs::ifstream ifs(path, std::ios::in);
+    // fs::ifstream ifs(path, std::ios::in);
+    std::ifstream ifs(path, std::ios::in);
     if (ifs) {
       std::string line;
       if (std::getline(ifs, line)) {

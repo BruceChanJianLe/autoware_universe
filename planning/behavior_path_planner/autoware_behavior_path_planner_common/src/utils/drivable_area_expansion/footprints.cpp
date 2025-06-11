@@ -20,6 +20,8 @@
 #include <autoware/universe_utils/geometry/geometry.hpp>
 
 #include <boost/geometry/strategies/transform/matrix_transformers.hpp>
+#include <boost/geometry/algorithms/transform.hpp>
+
 
 #include <tf2/utils.h>
 

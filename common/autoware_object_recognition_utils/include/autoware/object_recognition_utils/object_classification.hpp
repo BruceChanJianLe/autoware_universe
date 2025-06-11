@@ -20,6 +20,8 @@
 #include <string>
 #include <vector>
 
+#include <cstdint>
+
 namespace autoware::object_recognition_utils
 {
 using autoware_perception_msgs::msg::ObjectClassification;

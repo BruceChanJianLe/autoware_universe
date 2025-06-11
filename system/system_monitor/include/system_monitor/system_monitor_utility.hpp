@@ -28,6 +28,7 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include <fstream>
 
 namespace fs = boost::filesystem;
 
@@ -78,7 +79,8 @@ public:
 
       std::string type;
       const fs::path type_path = path / "type";
-      fs::ifstream ifs(type_path, std::ios::in);
+      // fs::ifstream ifs(type_path, std::ios::in);
+      std::ifstream ifs(type_path, std::ios::in);
       if (ifs) {
         std::string line;
         if (std::getline(ifs, line)) {

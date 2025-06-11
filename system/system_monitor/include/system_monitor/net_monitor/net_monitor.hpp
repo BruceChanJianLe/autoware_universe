@@ -34,6 +34,8 @@
 #include <string>
 #include <vector>
 
+#include <rclcpp/rclcpp.hpp>
+
 template <typename T>
 constexpr auto to_mbit(T value)
 {

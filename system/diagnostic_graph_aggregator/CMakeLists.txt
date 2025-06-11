@@ -12,6 +12,7 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
   src/common/graph/graph.cpp
   src/common/graph/units.cpp
 )
+target_link_libraries(${PROJECT_NAME} yaml-cpp)
 
 ament_auto_add_executable(tree
   src/tool/tree.cpp

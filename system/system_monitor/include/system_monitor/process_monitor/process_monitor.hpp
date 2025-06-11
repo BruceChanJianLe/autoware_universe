@@ -31,6 +31,8 @@
 #include <string>
 #include <vector>
 
+#include <rclcpp/rclcpp.hpp>
+
 namespace bp = boost::process;
 
 class ProcessMonitor : public rclcpp::Node

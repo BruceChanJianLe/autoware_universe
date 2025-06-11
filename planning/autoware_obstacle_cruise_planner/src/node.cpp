@@ -23,6 +23,7 @@
 #include "autoware/universe_utils/ros/marker_helper.hpp"
 #include "autoware/universe_utils/ros/update_param.hpp"
 
+#include <pcl/common/transforms.h>
 #include <pcl_ros/transforms.hpp>
 #include <tf2_eigen/tf2_eigen.hpp>
 

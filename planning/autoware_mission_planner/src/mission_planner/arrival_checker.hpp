@@ -16,6 +16,7 @@
 #define MISSION_PLANNER__ARRIVAL_CHECKER_HPP_
 
 #include <autoware/motion_utils/vehicle/vehicle_state_checker.hpp>
+#include <rclcpp/clock.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include <autoware_planning_msgs/msg/pose_with_uuid_stamped.hpp>
@@ -42,6 +43,8 @@ private:
   std::optional<PoseWithUuidStamped> goal_with_uuid_;
   rclcpp::Subscription<PoseWithUuidStamped>::SharedPtr sub_goal_;
   autoware::motion_utils::VehicleStopChecker vehicle_stop_checker_;
+  rclcpp::Logger logger_;
+  rclcpp::Clock::SharedPtr clock_ptr_;
 };
 
 }  // namespace autoware::mission_planner

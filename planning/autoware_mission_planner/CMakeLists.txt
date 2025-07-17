@@ -4,6 +4,8 @@ project(autoware_mission_planner)
 find_package(autoware_cmake REQUIRED)
 autoware_package()
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 ament_auto_add_library(goal_pose_visualizer_component SHARED
   src/goal_pose_visualizer/goal_pose_visualizer.cpp
 )

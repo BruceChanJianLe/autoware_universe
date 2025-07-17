@@ -19,11 +19,15 @@
 #include <autoware/universe_utils/math/unit_conversion.hpp>
 
 #include <tf2/utils.h>
+#include <chrono>
 
 namespace autoware::mission_planner
 {
 
-ArrivalChecker::ArrivalChecker(rclcpp::Node * node) : vehicle_stop_checker_(node)
+ArrivalChecker::ArrivalChecker(rclcpp::Node * node)
+  : vehicle_stop_checker_(node)
+  , logger_{node->get_logger()}
+  , clock_ptr_{node->get_clock()}
 {
   const double angle_deg = node->declare_parameter<double>("arrival_check_angle_deg");
   angle_ = autoware::universe_utils::deg2rad(angle_deg);
@@ -52,11 +56,13 @@ bool ArrivalChecker::is_arrived(const PoseStamped & pose) const
 
   // Check frame id
   if (goal.header.frame_id != pose.header.frame_id) {
+    RCLCPP_WARN_STREAM_THROTTLE(logger_, *clock_ptr_, 5000,  __func__ << ": frame_id missmatch!");
     return false;
   }
 
   // Check distance.
   if (distance_ < autoware::universe_utils::calcDistance2d(pose.pose, goal.pose)) {
+    RCLCPP_WARN_STREAM_THROTTLE(logger_, *clock_ptr_, 5000, __func__ << ": distance not reach!");
     return false;
   }
 
@@ -65,11 +71,18 @@ bool ArrivalChecker::is_arrived(const PoseStamped & pose) const
   const double yaw_goal = tf2::getYaw(goal.pose.orientation);
   const double yaw_diff = autoware::universe_utils::normalizeRadian(yaw_pose - yaw_goal);
   if (angle_ < std::fabs(yaw_diff)) {
+    RCLCPP_WARN_STREAM_THROTTLE(logger_, *clock_ptr_, 5000, __func__ << ": angle not reach!");
     return false;
   }
 
   // Check vehicle stopped.
-  return vehicle_stop_checker_.isVehicleStopped(duration_);
+  if (vehicle_stop_checker_.isVehicleStopped(duration_)) {
+    RCLCPP_WARN_STREAM_THROTTLE(logger_, *clock_ptr_, 5000, __func__ << ": vehicle stopped!");
+    return true;
+  }
+
+  RCLCPP_WARN_STREAM_THROTTLE(logger_, *clock_ptr_, 1000, __func__ << ": vehicle moving!");
+  return false;
 }
 
 }  // namespace autoware::mission_planner
